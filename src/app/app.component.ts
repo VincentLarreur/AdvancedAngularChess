@@ -17,24 +17,24 @@ export class AppComponent {
     public fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     private currentStateIndex: number;
     manualMove = 'd2d4';
-    icons: PieceIconInput = {
-        blackBishopUrl: '',
-        blackKingUrl: '',
-        blackKnightUrl: '',
-        blackPawnUrl: '',
-        blackQueenUrl: '',
-        blackRookUrl: '',
-        whiteBishopUrl: '',
-        whiteKingUrl: '',
-        whiteKnightUrl: '',
-        whitePawnUrl: '',
-        whiteQueenUrl: '',
-        whiteRookUrl: ''
+    public icons: PieceIconInput = {
+        blackBishopUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/bb.png',
+        blackKingUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/bk.png',
+        blackKnightUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/bn.png',
+        blackPawnUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/bp.png',
+        blackQueenUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/bq.png',
+        blackRookUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/br.png',
+        whiteBishopUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wb.png',
+        whiteKingUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wk.png',
+        whiteKnightUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wn.png',
+        whitePawnUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wp.png',
+        whiteQueenUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wq.png',
+        whiteRookUrl: 'https://images.chesscomfiles.com/chess-themes/pieces/light/150/wr.png'
     };
 
-    public darkTileColor = 'rgb(97, 84, 61)';
-    public lightTileColor = '#BAA378';
-    public size = 400;
+    public darkTileColor = '#7B9FB6';
+    public lightTileColor = '#DAE3E8';
+    public size = 500;
     public dragDisabled = false;
     public drawDisabled = false;
     public lightDisabled = false;
