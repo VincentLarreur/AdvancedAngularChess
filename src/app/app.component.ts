@@ -39,6 +39,7 @@ export class AppComponent {
     public drawDisabled = false;
     public lightDisabled = false;
     public darkDisabled = false;
+    public color = "blancs";
 
     public reset(): void {
         alert('Resetting board');
@@ -63,6 +64,7 @@ export class AppComponent {
 
     public moveCallback(move: MoveChange): void {
         this.fen = this.boardManager.getFEN();
+        this.color = (this.color == "blancs") ? "noirs" : "blancs";
         console.log(move);
     }
 
