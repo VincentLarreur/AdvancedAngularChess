@@ -215,7 +215,7 @@ export class NgxChessBoardComponent
             this.checkForPossibleMoves(Color.WHITE);
         const stalemate =
             this.checkForPat(Color.BLACK) || this.checkForPat(Color.WHITE);
-
+        
         this.disabling = false;
         this.board.calculateFEN();
 
