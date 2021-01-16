@@ -111,9 +111,4 @@
     stroke-width: 2;
 }
 
-svg {
-    filter: drop-shadow(1px 1px 0px #111) drop-shadow(-1px 1px 0px #111) drop-shadow(1px -1px 0px #111)
-        drop-shadow(-1px -1px 0px #111);
-}
-
 :host { display:inline-block!important; }

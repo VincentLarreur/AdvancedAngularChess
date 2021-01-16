@@ -1,4 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
+import Swal from 'sweetalert2';
 import { MoveChange, NgxChessBoardComponent } from 'ngx-chess-board';
 import { PieceIconInput } from 'ngx-chess-board';
 import { FenComponent } from './components/fen/fen.component';
@@ -39,10 +40,9 @@ export class AppComponent {
     public drawDisabled = false;
     public lightDisabled = false;
     public darkDisabled = false;
-    public color = "blancs";
+    public white = true;
 
     public reset(): void {
-        alert('Resetting board');
         this.boardManager.reset();
         this.fen = this.boardManager.getFEN();
     }
@@ -64,7 +64,22 @@ export class AppComponent {
 
     public moveCallback(move: MoveChange): void {
         this.fen = this.boardManager.getFEN();
-        this.color = (this.color == "blancs") ? "noirs" : "blancs";
+        if(move.checkmate) {
+            Swal.fire({
+                title: 'Checkmate !',
+                text: `Congrats, ${move.color} won`,
+                icon: 'success',
+                confirmButtonText: 'Okay !'
+            });
+        } else if(move.stalemate) {
+            Swal.fire({
+                title: 'Stalemate...',
+                text: `Unfortunately, it's a Stalemate`,
+                icon: 'error',
+                confirmButtonText: 'Okay !'
+            });
+        }
+        this.white = !this.white;
         console.log(move);
     }
 
@@ -78,6 +93,7 @@ export class AppComponent {
     }
 
     showMoveHistory() {
+        console.log(this.boardManager.getMoveHistory());
         alert(JSON.stringify(this.boardManager.getMoveHistory()));
     }
 

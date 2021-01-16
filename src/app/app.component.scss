@@ -22,6 +22,12 @@ main {
         margin: 2%;
     }
 
+    .div_playing {
+        position: absolute;
+        top: 0px;
+        left: 18%;
+    }
+
     .div_chess {
         margin-left: 20%;
     }
@@ -33,7 +39,15 @@ main {
             margin-bottom: 10px;
         }
     }
+
+    .div_display_moves {
+        span {
+            white-space:nowrap;
+        }
+    }
 }
+
+
 
 footer {
     right: 0;
