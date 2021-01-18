@@ -15,6 +15,7 @@ import { BoardLoader } from './board-state-provider/board-loader';
 import { BoardState } from './board-state-provider/board-state';
 import { BoardStateProvider } from './board-state-provider/board-state-provider';
 import { MoveStateProvider } from './board-state-provider/move-state-provider';
+import { Bot } from './bot/bot';
 import { CoordsProvider } from './coords/coords-provider';
 import { Arrow } from './drawing-tools/arrow';
 import { Circle } from './drawing-tools/circle';
@@ -56,6 +57,9 @@ export interface MoveChange extends HistoryMove {
 })
 export class NgxChessBoardComponent
     implements OnInit, OnChanges, NgxChessBoardView {
+    static move(botmove: any) {
+        throw new Error('Method not implemented.');
+    }
     @Input() darkTileColor = Constants.DEFAULT_DARK_TILE_COLOR;
     @Input() lightTileColor: string = Constants.DEFAULT_LIGHT_TILE_COLOR;
     @Input() showCoords = true;
@@ -81,6 +85,7 @@ export class NgxChessBoardComponent
     drawProvider: DrawProvider;
     drawPoint: DrawPoint;
     pieceIconManager: PieceIconInputManager;
+    bot: Bot;
 
     constructor(private ngxChessBoardService: NgxChessBoardService) {
         this.board = new Board();
@@ -90,6 +95,7 @@ export class NgxChessBoardComponent
         this.moveHistoryProvider = new HistoryMoveProvider();
         this.drawProvider = new DrawProvider();
         this.pieceIconManager = new PieceIconInputManager();
+        this.bot = new Bot();
     }
 
     heightAndWidth: number = Constants.DEFAULT_SIZE;
@@ -114,6 +120,25 @@ export class NgxChessBoardComponent
         this.pieceIconManager.pieceIconInput = pieceIcons;
     }
 
+    @Input('botLevel')
+    public set botLevel(botLevel: number) {
+        if(botLevel != 0) {
+            var colorPlayerPlaying;
+            if(this.board.reverted) {
+                colorPlayerPlaying = 'black';
+                this.lightDisabled = true;
+                this.darkDisabled = false;
+            } else {
+                colorPlayerPlaying = 'white';
+                this.lightDisabled = false;
+                this.darkDisabled = true;
+            }
+            this.bot.botlevel = botLevel;
+            this.bot.playerPlaying = colorPlayerPlaying;
+            this.bot.start(this);
+        }
+    }
+
     @HostListener('contextmenu', ['$event'])
     onRightClick(event: MouseEvent) {
         event.preventDefault();
@@ -136,6 +161,7 @@ export class NgxChessBoardComponent
         this.ngxChessBoardService.componentMethodCalled$.subscribe(() => {
             this.board.reset();
         });
+        this.bot.cleanAccount();
         this.calculatePieceSize();
     }
 
@@ -291,7 +317,7 @@ export class NgxChessBoardComponent
         );
     }
 
-    movePiece(toMovePiece: Piece, newPoint: Point, promotionIndex?: number) {
+    async movePiece(toMovePiece: Piece, newPoint: Point, promotionIndex?: number) {
         const destPiece = this.board.pieces.find(
             (piece) =>
                 piece.point.col === newPoint.col &&
@@ -315,6 +341,11 @@ export class NgxChessBoardComponent
             !!destPiece
         );
         this.moveHistoryProvider.addMove(move);
+
+        if(this.bot.gameId != null && this.bot.playerlastmove == false) {
+            this.bot.playerlastmove = true;
+            await this.bot.makeMoove(move.move, this);
+        }
 
         if (toMovePiece instanceof King) {
             const squaresMoved = Math.abs(newPoint.col - toMovePiece.point.col);
@@ -767,7 +798,7 @@ export class NgxChessBoardComponent
         }
     }
 
-    move(coords: string) {
+    public move(coords: string) {
         if (coords) {
             const sourceIndexes = MoveUtils.translateCoordsToIndex(
                 coords.substring(0, 2),
