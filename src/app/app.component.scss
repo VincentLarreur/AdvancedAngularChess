@@ -39,7 +39,15 @@ main {
             margin-bottom: 10px;
         }
     }
+
+    .div_display_moves {
+        span {
+            white-space:nowrap;
+        }
+    }
 }
+
+
 
 footer {
     right: 0;

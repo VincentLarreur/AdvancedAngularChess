@@ -80,7 +80,6 @@ export class AppComponent {
             });
         }
         this.white = !this.white;
-        console.log(move);
     }
 
     public moveManual(): void {

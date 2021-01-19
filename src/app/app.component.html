@@ -1,7 +1,8 @@
 <header>
     <h1>Advanced
         <br>Angular
-        <br>Chess</h1>
+        <br>Chess
+        </h1>
 </header>
 <main>
     <div class="div_playing">
@@ -39,6 +40,14 @@
         <button type="button" class="btn btn-success"
                 (click)="showMoveHistory()">Display moves
         </button>
+
+        <span class="div_display_moves" *ngFor="let move of this.boardManager?.getMoveHistory(); let i = index">
+            <span class="badge rounded-pill bg-light text-dark" *ngIf="i%2==0">{{ move.move }}</span>
+            <span class="badge rounded-pill bg-dark" *ngIf="i%2!=0">{{ move.move }}</span>
+            <div *ngIf="(i+1)%4==0">
+            </div>
+        </span>
+        
     </div>
 
 </main>
