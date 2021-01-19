@@ -80,7 +80,6 @@ export class AppComponent {
             });
         }
         this.white = !this.white;
-        console.log(move);
     }
 
     public moveManual(): void {
@@ -93,7 +92,6 @@ export class AppComponent {
     }
 
     showMoveHistory() {
-        console.log(this.boardManager.getMoveHistory());
         alert(JSON.stringify(this.boardManager.getMoveHistory()));
     }
 
