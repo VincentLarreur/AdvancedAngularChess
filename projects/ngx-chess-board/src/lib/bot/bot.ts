@@ -38,18 +38,22 @@ export class Bot {
         console.log('Player do ', move);
         await this.instance.post(`/api/board/game/${this.gameId}/move/${move}`)
             .then(() => {
-                setTimeout(this.getBotmove, 4000, this.instance, this.gameId, board);
+                setTimeout(this.getBotmove, 4000, this.instance, this.gameId, board, move);
             });
     }
 
-    private async getBotmove(instance, gameId, board) {
+    private async getBotmove(instance, gameId, board, move) {
         await instance.get('/api/account/playing')
             .then(response => {
                 const game = (response.data.nowPlaying.filter(element => element.gameId == gameId))[0];
                 const botmove = game.lastMove;
-                board.move(botmove);
-                console.log('Bot do ', botmove);
-                board.bot.playerlastmove = false;
+                if(botmove != move) { // case that lichess take longer to calculate next moove and we get our move as bot move
+                    board.move(botmove);
+                    console.log('Bot do ', botmove);
+                    board.bot.playerlastmove = false;
+                } else {
+                    setTimeout(this.getBotmove, 4000, instance, gameId, board, move);
+                }
             });
     }
 
