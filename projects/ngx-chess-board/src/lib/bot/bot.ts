@@ -46,7 +46,14 @@ export class Bot {
         await instance.get('/api/account/playing')
             .then(response => {
                 const game = (response.data.nowPlaying.filter(element => element.gameId == gameId))[0];
-                const botmove = game.lastMove;
+                var botmove = game.lastMove;
+                switch(botmove){
+                    case 'e8a8':
+                        botmove='e8c8';
+                        break;
+                    case 'e8h8':
+                        botmove='e8g8';    
+                }
                 if(botmove != move) { // case that lichess take longer to calculate next moove and we get our move as bot move
                     board.move(botmove);
                     console.log('Bot do ', botmove);
