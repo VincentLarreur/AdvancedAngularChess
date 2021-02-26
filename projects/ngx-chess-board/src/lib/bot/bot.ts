@@ -52,7 +52,12 @@ export class Bot {
                         botmove='e8c8';
                         break;
                     case 'e8h8':
-                        botmove='e8g8';    
+                        botmove='e8g8'; 
+                    case 'e1a1':
+                        botmove='e1c1';
+                        break;
+                    case 'e1h1':
+                        botmove='e1g1';   
                 }
                 if(botmove != move) { // case that lichess take longer to calculate next moove and we get our move as bot move
                     board.move(botmove);
