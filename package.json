@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8080",
-    "build": "npm run build-board && ng build --prod",
+    "build": "npm run build-board --force && ng build --prod",
     "build-board": "ng build ngx-chess-board",
     "test": "ng test",
     "lint": "ng lint",
