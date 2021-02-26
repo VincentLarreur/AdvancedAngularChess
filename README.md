@@ -22,6 +22,8 @@
    npm i ngx-chess-board
    ```
 
+   L'échiquier seras ensuite disponible sur votre [localhost](http://localhost:8080/).
+
    ## Fonctionnalités ajoutées
 
    Nous nous sommes au début un peu marché sur les pieds, implementant la même feature sans se parler, aussi nous avons par la suite travaillé à l'aide de branche sur github afin d'être sur que cela n'arrive pas une seconde fois.
