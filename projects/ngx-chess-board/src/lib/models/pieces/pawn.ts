@@ -28,7 +28,7 @@ export class Pawn extends Piece {
                 possiblePoints.push(new Point(row - 1, col));
 
                 if (
-                    !this.isMovedAlready &&
+                    row == 6 &&
                     this.board.isFieldEmpty(row - 2, col)
                 ) {
                     possiblePoints.push(new Point(row - 2, col));
@@ -44,7 +44,7 @@ export class Pawn extends Piece {
                 possiblePoints.push(new Point(row + 1, col));
 
                 if (
-                    !this.isMovedAlready &&
+                    row == 1 &&
                     this.board.isFieldEmpty(row + 2, col)
                 ) {
                     possiblePoints.push(new Point(row + 2, col));

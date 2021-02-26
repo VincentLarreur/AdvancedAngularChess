@@ -21,6 +21,7 @@
             [dragDisabled]="dragDisabled"
             [drawDisabled]="drawDisabled"
             [pieceIcons]="icons"
+            [botLevel]="botlevel"
         ></ngx-chess-board>
     </div>
 
@@ -30,11 +31,13 @@
         </button>
 
         <button type="button" class="btn btn-primary"
-                (click)="reverse()">Reverse
+                (click)="reverse()"
+                [disabled]="botlevel != 0">Reverse
         </button>
 
         <button type="button" class="btn btn-secondary"
-                (click)="undo()">Undo
+                (click)="undo()"
+                [disabled]="botlevel != 0">Undo
         </button>
 
         <button type="button" class="btn btn-success"
@@ -48,6 +51,29 @@
             </div>
         </span>
         
+    </div>
+
+    <div class="div_bot">
+        <h4>Play against</h4>
+        <span>
+            Local
+            <label class="switch mt-3">
+                <input id="switchBot" type="checkbox"
+                (click)="switchBot()"
+                [disabled]="botlevel != 0 && boardManager.getMoveHistory() != []">
+                <span class="slider round"></span>
+            </label>
+            Bot
+        </span>
+        <div class="div_bot_level" *ngIf="bot">
+            Choose Bot level
+            <button [disabled]="botlevel != 0" class="bot_level" type="button" class="btn btn-warning"
+                *ngFor="let a of fakeArray; let index = index"
+                (click)="setBotLevel(index+1)">{{ index+1 }}
+            </button>
+            Bot level 
+            <span class="badge rounded-pill bg-success">{{ botlevel }}</span>
+        </div>
     </div>
 
 </main>

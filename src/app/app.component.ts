@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import Swal from 'sweetalert2';
 import { MoveChange, NgxChessBoardComponent } from 'ngx-chess-board';
 import { PieceIconInput } from 'ngx-chess-board';
-import { FenComponent } from './components/fen/fen.component';
-import { MovesComponent } from './components/moves/moves.component';
 
 @Component({
     selector: 'app-root',
@@ -14,8 +12,6 @@ export class AppComponent {
     @ViewChild('board')
     boardManager: NgxChessBoardComponent;
 
-    @ViewChild('fenManager') fenManager: FenComponent;
-    public fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
     private currentStateIndex: number;
     manualMove = 'd2d4';
     public icons: PieceIconInput = {
@@ -38,13 +34,15 @@ export class AppComponent {
     public size = 500;
     public dragDisabled = false;
     public drawDisabled = false;
-    public lightDisabled = false;
-    public darkDisabled = false;
     public white = true;
+    public bot = false;
+    public botlevel = 0;
+    fakeArray = new Array(8);
+
 
     public reset(): void {
         this.boardManager.reset();
-        this.fen = this.boardManager.getFEN();
+        this.botlevel = 0;
     }
 
     public reverse(): void {
@@ -53,17 +51,9 @@ export class AppComponent {
 
     public undo(): void {
         this.boardManager.undo();
-        this.fen = this.boardManager.getFEN();
-    }
-
-    public setFen(): void {
-        if (this.fen) {
-            this.boardManager.setFEN(this.fen);
-        }
     }
 
     public moveCallback(move: MoveChange): void {
-        this.fen = this.boardManager.getFEN();
         if(move.checkmate) {
             Swal.fire({
                 title: 'Checkmate !',
@@ -86,29 +76,16 @@ export class AppComponent {
         this.boardManager.move(this.manualMove);
     }
 
-    getFEN() {
-        let fen = this.boardManager.getFEN();
-        alert(fen);
-    }
-
     showMoveHistory() {
         alert(JSON.stringify(this.boardManager.getMoveHistory()));
     }
 
-    switchDrag() {
-        this.dragDisabled = !this.dragDisabled;
+    switchBot() {
+        this.bot = !this.bot;
     }
 
-    switchDraw() {
-        this.drawDisabled = !this.drawDisabled;
-    }
-
-    switchDarkDisabled() {
-        this.darkDisabled = !this.darkDisabled;
-    }
-
-    switchLightDisabled() {
-        this.lightDisabled = !this.lightDisabled;
+    setBotLevel(level: number) {
+        this.botlevel = level;
     }
 
 }

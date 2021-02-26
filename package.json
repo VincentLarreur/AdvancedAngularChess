@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --port 8080",
     "build": "npm run build-board && ng build --prod",
     "build-board": "ng build ngx-chess-board",
     "test": "ng test",
