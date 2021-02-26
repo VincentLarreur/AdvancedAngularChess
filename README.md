@@ -48,7 +48,9 @@
 
    ### Les actions des joueurs
 
-   // TODO PERIG
+   De base, l'historique des déplacements des joueurs n'était pas affiché pendant la partie. Nous avons donc décidés de créer un affichage en temps réel des déplacements faits au cours de la partie.
+
+   ![Alt text](./doc/movesHistory.png)
 
    ## Chess BOT
 
