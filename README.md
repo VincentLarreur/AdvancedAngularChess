@@ -71,6 +71,11 @@
 
    Pour récuperer le coup du BOT, nous avons choisis d'utiliser une requete API qui récupère toutes les parties joués par le compte lichess et à l'aide de l'id de la partie récuperer lors du début de la partie, nous retrouvons la bonne partie et regardons quel est le dernier coup joué de cette partie. Nous avons du faire cela, car il existe bien une partie de l'api pour récuperer toutes les informations d'une partie mais celle ci est beaucoup moin performante et prend environ 25 secondes à s'executer, nous avons donc choisi cette approche non conventionnelle mais plus performante suite à différents tests.
 
+   ### Clore la partie
+
+   Lors d'un reset, nous avons forcé la fermeture de toutes les parties du compte lichess en les faisant abandonner afin de nettoyer et d'éviter d'avoir des centaines de parties en cours et non fini sur le compte.
+
+
    ### Problèmes rencontrés
 
    Nous avons rencontrés quelques problèmes lors de l'implémentation du BOT, niveau authentification auprès de l'API avec le port comme expliqué auparavant, mais pas la suite, nous avons observé qu'apèrs une 15 de coups joués contre le BOT, la partie s'arretait et cela car nous recevions notre propre coups comme dernier coup joué. Afin de limiter ce problème, nous sommes passés d'une attente de 3 secondes avant de récuperer le coup du bot à 8 afin de lui laisser le temps de calculer et donner son coup et un mécanisme pour réessayer si le dernier coup joué est le notre.
