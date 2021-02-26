@@ -48,7 +48,7 @@
 
    ### Les actions des joueurs
 
-   De base, l'historique des déplacements des joueurs n'étaient pas affichées pendant la partie. Nous avons donc décidés de créer un affichage en tant réel des déplacements faits au cours de la partie.
+   De base, l'historique des déplacements des joueurs n'était pas affiché pendant la partie. Nous avons donc décidés de créer un affichage en temps réel des déplacements faits au cours de la partie.
 
    ![Alt text](./doc/movesHistory.png)
 
