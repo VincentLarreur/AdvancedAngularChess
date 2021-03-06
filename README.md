@@ -6,8 +6,9 @@
 
    Comme demandé pour ce cours, nous sommes parti d'un projet existant, trouvé sur github qui nous permettait de le mettre en place et d'y ajouter des fonctionnalités, notre projet est donc basé sur le projet [ngx-chess-board](https://grzegorz103.github.io/ngx-chess-board/chess-board/index.html) qui vise à proposer une implémentation d'un échiquier pour 2 joueur pour les sites web.
 
-   ## Demo
-   Voir notre  [version](https://main--epic-hypatia-cf44aa.netlify.app/) de l'échiquier.
+   ## Demo [![Netlify Status](https://api.netlify.com/api/v1/badges/d715a628-5943-47e3-bfa8-462330abf5bc/deploy-status)](https://app.netlify.com/sites/angularchess/deploys)
+   
+   Voir notre  [version](https://angularchess.netlify.app/) de l'échiquier.
    
    Voir la  [version demo](https://grzegorz103.github.io/ngx-chess-board/chess-board/index.html) du projet de départ.
    ## Installation d'Advanced Angular Chess
