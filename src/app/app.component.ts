@@ -64,7 +64,7 @@ export class AppComponent {
         } else if(move.stalemate) {
             Swal.fire({
                 title: 'Stalemate...',
-                text: `Unfortunately, it's a Stalemate`,
+                text: 'Unfortunately, it\'s a Stalemate',
                 icon: 'error',
                 confirmButtonText: 'Okay !'
             });
@@ -81,7 +81,17 @@ export class AppComponent {
     }
 
     switchBot() {
-        this.bot = !this.bot;
+        console.log(window);
+        if(window.location.host != 'localhost:8080') {
+            Swal.fire({
+                title: 'Functionality unavailable',
+                text: 'This functionnality is only available on localhost origin (local development). This website is not whitelisted to call the Lichess API, used for the bot. Clone and launch the chess project locally to play against Stockfish',
+                icon: 'error',
+                confirmButtonText: 'Okay !  '
+            });
+        } else {
+            this.bot = !this.bot;
+        }
     }
 
     setBotLevel(level: number) {
