@@ -81,7 +81,6 @@ export class AppComponent {
     }
 
     switchBot() {
-        console.log(window);
         if(window.location.host != 'localhost:8080') {
             Swal.fire({
                 title: 'Functionality unavailable',
